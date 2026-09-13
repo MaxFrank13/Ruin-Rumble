@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="TreasureData" load_steps=2 format=3 uid="uid://c3wjx8x16hi6a"]
+
+[ext_resource type="Script" uid="uid://c4cgd4q47dju6" path="res://world/treasure_data/treasure_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+treasure_name = "Gold"

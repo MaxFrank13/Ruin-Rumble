@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=4 uid="uid://c3frko43r87ek"]
+
+[ext_resource type="PackedScene" uid="uid://dnybvndxx0b6s" path="res://world/ground_tile_map.tscn" id="1_tilemap"]
+[ext_resource type="PackedScene" uid="uid://cp25syl5r682i" path="res://player/player.tscn" id="2_player"]
+
+[node name="Main" type="Node2D"]
+
+[node name="GroundTileMap" parent="." instance=ExtResource("1_tilemap")]
+
+[node name="BlockLayer" parent="GroundTileMap" index="1"]
+tile_map_data = PackedByteArray("AAAEAAIAAQAAAAAAAAAFAAMAAQACAAIAAAAFAAIAAQACAAAAAAAEAAMAAQAAAAIAAAACAAgAAQAEAAIAAAACAAcAAQAEAAAAAAAKAAkAAQAEAAIAAAAKAAgAAQAEAAEAAAAKAAcAAQAEAAAAAAAOAAMAAQACAAIAAAAOAAIAAQACAAAAAAANAAMAAQAAAAIAAAANAAIAAQAAAAAAAAAOAAcAAQAEAAQAAAA=")
+
+[node name="Player" parent="." node_paths=PackedStringArray("level_tile_map") instance=ExtResource("2_player")]
+level_tile_map = NodePath("../GroundTileMap")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_smoothed = true
+
+[editable path="GroundTileMap"]
