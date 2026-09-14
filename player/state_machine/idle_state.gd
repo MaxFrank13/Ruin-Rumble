@@ -5,9 +5,11 @@ extends PlayerState
 @export var dig_state: PlayerState
 
 func process_input(event: InputEvent) -> PlayerState:
-	if event.is_action_pressed("scan"):
+	## TODO: replace with logic that uses whatever item is set to the corresponding slot
+	## currently hardcoded so that A is always scan (detector) and b is always dig (shovel)
+	if event.is_action_pressed("A"):
 		return scan_state
-	if event.is_action_pressed("action"):
+	if event.is_action_pressed("B"):
 		return dig_state
 
 	var input_vector: Vector2i = Input.get_vector("move_left", "move_right", "move_up", "move_down")

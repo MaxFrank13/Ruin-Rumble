@@ -1,9 +1,131 @@
-[gd_scene load_steps=3 format=4 uid="uid://c3frko43r87ek"]
+[gd_scene load_steps=8 format=4 uid="uid://c3frko43r87ek"]
 
+[ext_resource type="Texture2D" uid="uid://duw4ss84dj3gb" path="res://assets/items/detector.png" id="1_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dnybvndxx0b6s" path="res://world/ground_tile_map.tscn" id="1_tilemap"]
+[ext_resource type="Texture2D" uid="uid://cjkjj1df5wpqr" path="res://assets/items/shovel.png" id="2_7mycd"]
 [ext_resource type="PackedScene" uid="uid://cp25syl5r682i" path="res://player/player.tscn" id="2_player"]
+[ext_resource type="Texture2D" uid="uid://cjmk3xqtllalj" path="res://assets/8x8/heart.png" id="3_lquwl"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1bvp3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lquwl"]
+
+[node name="Main" type="Node"]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "A"
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_1bvp3")
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer/PanelContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("1_lquwl")
+stretch_mode = 5
+
+[node name="PanelContainer2" type="PanelContainer" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+text = "B"
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lquwl")
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer/PanelContainer2/HBoxContainer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("2_7mycd")
+stretch_mode = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(36, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer2/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer2/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "$"
+
+[node name="Label2" type="Label" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer2/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "999"
+
+[node name="PanelContainer2" type="PanelContainer" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer2/PanelContainer2"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer2/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_lquwl")
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_lquwl")
+stretch_mode = 5
+
+[node name="TextureRect5" type="TextureRect" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_lquwl")
+stretch_mode = 5
+
+[node name="TextureRect6" type="TextureRect" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_lquwl")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_lquwl")
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="HUD/PanelContainer/HBoxContainer/HBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_lquwl")
+stretch_mode = 5
 
 [node name="GroundTileMap" parent="." instance=ExtResource("1_tilemap")]
 
