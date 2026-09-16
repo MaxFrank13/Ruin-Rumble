@@ -1,15 +1,29 @@
-extends PlayerState
+class_name ScanState extends PlayerState
 
 @export var idle_state: PlayerState
-@export var scan_radius: int = 2
+@export var scan_radius: int = 3
+@export var ring_stagger: float = 0.08
+@export var display_duration: float = 0.6
+
+var _finished: bool = false
 
 func enter() -> void:
 	super()
+	_finished = false
 	var hits : Array[Vector2i] = parent.level_tile_map.find_treasure_in_radius(parent.current_tile, scan_radius)
 	parent.treasure_scanned.emit(_format_hint(hits, parent.current_tile))
+	parent.level_tile_map.scan_overlay_finished.connect(_on_overlay_finished, CONNECT_ONE_SHOT)
+	parent.level_tile_map.play_scan_overlay(parent.current_tile, scan_radius, ring_stagger, display_duration)
+
+func exit() -> void:
+	if parent.level_tile_map.scan_overlay_finished.is_connected(_on_overlay_finished):
+		parent.level_tile_map.scan_overlay_finished.disconnect(_on_overlay_finished)
 
 func process_frame(_delta: float) -> PlayerState:
-	return idle_state
+	return idle_state if _finished else null
+
+func _on_overlay_finished() -> void:
+	_finished = true
 
 func _format_hint(hits: Array[Vector2i], from: Vector2i) -> String:
 	if hits.is_empty():

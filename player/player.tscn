@@ -4,31 +4,13 @@
 [ext_resource type="Script" uid="uid://ca24ok38awp78" path="res://player/state_machine/state_machine.gd" id="2_statemachine"]
 [ext_resource type="Script" uid="uid://dj1888y7ayrjy" path="res://player/state_machine/idle_state.gd" id="3_idle"]
 [ext_resource type="Script" uid="uid://b0v6s1hcrm5dn" path="res://player/state_machine/move_state.gd" id="4_move"]
-[ext_resource type="Texture2D" uid="uid://bo8aslkp0osen" path="res://assets/8x8/character-dot-8x8.png" id="5_texture"]
 [ext_resource type="Script" uid="uid://tpbt34nu7qv3" path="res://player/state_machine/scan_state.gd" id="6_scan"]
 [ext_resource type="Script" uid="uid://w6o152n55sn7" path="res://player/state_machine/dig_state.gd" id="7_dig"]
+[ext_resource type="Script" path="res://player/state_machine/interact_state.gd" id="8_interact"]
+[ext_resource type="SpriteFrames" uid="uid://btq8ai63cd786" path="res://player/animations/player_animation_frames.tres" id="8_rgyib"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_player"]
 radius = 4.0
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_player"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_texture")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_texture")
-}],
-"loop": true,
-"name": &"move",
-"speed": 5.0
-}]
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 10
@@ -38,17 +20,18 @@ script = ExtResource("1_player")
 script = ExtResource("2_statemachine")
 initial_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("move_state", "scan_state", "dig_state")]
+[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("move_state", "scan_state", "dig_state", "interact_state")]
 script = ExtResource("3_idle")
 move_state = NodePath("../move")
 scan_state = NodePath("../scan")
 dig_state = NodePath("../dig")
+interact_state = NodePath("../interact")
 state_name = "idle"
 
 [node name="move" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("4_move")
 idle_state = NodePath("../idle")
-state_name = "move"
+state_name = "walk"
 
 [node name="scan" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("6_scan")
@@ -60,9 +43,15 @@ script = ExtResource("7_dig")
 idle_state = NodePath("../idle")
 state_name = "dig"
 
+[node name="interact" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("8_interact")
+idle_state = NodePath("../idle")
+state_name = "interact"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_player")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_player")
-animation = &"idle"
+sprite_frames = ExtResource("8_rgyib")
+animation = &"idle_down"
+offset = Vector2(0, -4)

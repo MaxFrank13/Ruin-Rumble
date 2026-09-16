@@ -11,7 +11,6 @@ func setup(direction: Vector2i) -> void:
 	_initial_direction = direction
 
 func enter() -> void:
-	super()
 	_queued_direction = Vector2i.ZERO
 	_started = _do_move(_initial_direction)
 	_initial_direction = Vector2i.ZERO
@@ -38,6 +37,8 @@ func process_frame(_delta: float) -> PlayerState:
 func _do_move(direction: Vector2i) -> bool:
 	if not parent.try_move(direction):
 		return false
+	parent.facing_direction = direction
+	play_directional_animation(state_name, direction)
 	_is_moving = true
 	var tween := parent.create_tween()
 	tween.tween_property(parent, "global_position", parent.level_tile_map.tile_to_world(parent.current_tile), parent.move_duration)

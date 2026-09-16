@@ -1,0 +1,15 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dfn7kp46vrtb5"]
+
+[ext_resource type="Texture2D" uid="uid://bgearekst5c7c" path="res://assets/8x8/tilesets/scan_noise_8x8.png" id="1_scan"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_scan"]
+texture = ExtResource("1_scan")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
+[resource]
+tile_size = Vector2i(8, 8)
+sources/0 = SubResource("TileSetAtlasSource_scan")

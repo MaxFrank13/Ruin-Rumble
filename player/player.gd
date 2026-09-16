@@ -7,6 +7,7 @@ class_name Player extends CharacterBody2D
 
 var current_tile: Vector2i = Vector2i.ZERO
 var move_duration: float = 0.15
+var facing_direction: Vector2i = Vector2i(0, 1)
 
 signal treasure_scanned(hint_text: String)
 
