@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dk6qfwpksusng"]
+
+[ext_resource type="Script" uid="uid://bujbgxyh6fp8r" path="res://items/item_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bue5c4tjmv5v4" path="res://assets/items/useable_items/GB-items.png" id="2_sheet"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icon"]
+atlas = ExtResource("2_sheet")
+region = Rect2(64, 56, 16, 32)
+
+[resource]
+script = ExtResource("1")
+item_name = "Rusted Spear"
+icon = SubResource("AtlasTexture_icon")
+value = 40
+use_type = 1
+capabilities = PackedStringArray("sharp", "weapon")
+damage = 1
+use_range = 5
+item_size = 1
+max_durability = 1
+durability_loss_per_use = 1

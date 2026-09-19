@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://enemies/bat_enemy.gd" id="1_script"]
+[ext_resource type="SpriteFrames" path="res://enemies/animations/bat_frames.tres" id="2_frames"]
+
+[node name="BatEnemy" type="Node2D"]
+z_index = 9
+script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -4)
+sprite_frames = ExtResource("2_frames")
+animation = &"flap"
+autoplay = "flap"

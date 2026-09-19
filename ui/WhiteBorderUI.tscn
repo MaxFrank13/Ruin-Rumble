@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://c4ylq2ybtvlql"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_border"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[node name="WhiteBorderUI" type="CanvasLayer" unique_id=938119871]
+
+[node name="HUD" type="Control" parent="." unique_id=1814951637]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="WhiteBorder" type="Panel" parent="HUD" unique_id=682930967]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 94.0
+offset_right = 39.0
+offset_bottom = 126.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_border")

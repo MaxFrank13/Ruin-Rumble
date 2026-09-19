@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://b88anbk6md3r1"]
+
+[ext_resource type="Script" uid="uid://bujbgxyh6fp8r" path="res://items/item_data.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bue5c4tjmv5v4" path="res://assets/items/useable_items/GB-items.png" id="2_sheet"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icon"]
+atlas = ExtResource("2_sheet")
+region = Rect2(120, 8, 16, 16)
+
+[resource]
+script = ExtResource("1")
+item_name = "Metal Plate"
+icon = SubResource("AtlasTexture_icon")
+value = 25
+use_type = 3
+capabilities = PackedStringArray("shield", "heavy")
+item_size = 2
+max_durability = 2
+durability_loss_per_use = 1

@@ -23,7 +23,10 @@ func process_physics(_delta: float) -> PlayerState:
 func play_directional_animation(base_name: String, direction: Vector2i) -> void:
 	if not base_name or not parent.animations.sprite_frames:
 		return
-	var directional_name := "%s_%s" % [base_name, _direction_suffix(direction)]
+	var effective_base := base_name
+	if parent is Player and (parent as Player).shield_charges > 0 and base_name in ["idle", "walk"]:
+		effective_base = "shield_" + base_name
+	var directional_name := "%s_%s" % [effective_base, _direction_suffix(direction)]
 	if parent.animations.sprite_frames.has_animation(directional_name):
 		parent.animations.play(directional_name)
 

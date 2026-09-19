@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=4]
+
+[ext_resource type="PackedScene" path="res://ui/hud.tscn" id="1_hud"]
+[ext_resource type="PackedScene" path="res://world/ground_tile_map.tscn" id="2_tilemap"]
+[ext_resource type="PackedScene" path="res://player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://enemies/moai_enemy.tscn" id="4_enemy"]
+[ext_resource type="PackedScene" path="res://interactables/room_exit.tscn" id="5_exit"]
+[ext_resource type="PackedScene" path="res://interactables/weight_plate.tscn" id="6_plate"]
+[ext_resource type="Script" path="res://rooms/room_setup.gd" id="7_setup"]
+[ext_resource type="Resource" path="res://items/loot/scrap_chunk.tres" id="8_fallback"]
+
+[node name="Room02" type="Node"]
+
+[node name="HUD" parent="." instance=ExtResource("1_hud")]
+
+[node name="GroundTileMap" parent="." instance=ExtResource("2_tilemap")]
+treasure_chance = 0.0
+item_chance = 0.0
+
+[node name="RoomSetup" type="Node2D" parent="."]
+script = ExtResource("7_setup")
+room_id = 2
+
+[node name="Player" parent="." node_paths=PackedStringArray("level_tile_map") instance=ExtResource("3_player")]
+level_tile_map = NodePath("../GroundTileMap")
+starting_tile = Vector2i(1, 2)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_smoothed = true
+
+[node name="MoaiEnemy" parent="." instance=ExtResource("4_enemy")]
+starting_tile = Vector2i(7, 5)
+chase_range = 8
+player_actions_per_move = 3
+
+[node name="WeightPlate" parent="." instance=ExtResource("6_plate")]
+tile_position = Vector2i(8, 4)
+gate_tile_position = Vector2i(10, 4)
+emergency_fallback_item = ExtResource("8_fallback")
+emergency_fallback_tile = Vector2i(3, 10)
+
+[node name="DeeperExit" parent="." instance=ExtResource("5_exit")]
+tile_position = Vector2i(16, 4)
+target_scene = "res://rooms/room_03.tscn"
+

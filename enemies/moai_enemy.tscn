@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cxl3v1ubf2t7h"]
+
+[ext_resource type="Script" uid="uid://b7rydi7jk257w" path="res://enemies/moai_enemy.gd" id="1_script"]
+[ext_resource type="SpriteFrames" path="res://enemies/animations/moai_frames.tres" id="2_frames"]
+
+[node name="MoaiEnemy" type="Node2D" unique_id=560771655]
+z_index = 9
+script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=911898299]
+texture_filter = 1
+sprite_frames = ExtResource("2_frames")
+animation = &"idle_down"
+offset = Vector2(0, -12)

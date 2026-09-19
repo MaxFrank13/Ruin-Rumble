@@ -10,26 +10,19 @@ func process_input(event: InputEvent) -> PlayerState:
 		return interact_state
 	if event.is_action_pressed("SELECT"):
 		InventoryManager.cycle_equipped_item()
+		var selected := InventoryManager.get_equipped_item()
+		if selected:
+			parent.show_status("Selected: %s ($%d)" % [selected.item_name, selected.display_value()])
 		return null
 	if event.is_action_pressed("B"):
-		return _use_equipped_item()
+		# B is always the treasure-hunting button: dig if standing on a signal,
+		# otherwise scan the surrounding area.
+		if parent.level_tile_map and parent.level_tile_map.has_buried_content(parent.current_tile):
+			return dig_state
+		return scan_state
 
 	var input_vector: Vector2i = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if input_vector != Vector2i.ZERO:
 		move_state.setup(input_vector)
 		return move_state
 	return null
-
-func _use_equipped_item() -> PlayerState:
-	var item: ItemData = InventoryManager.get_equipped_item()
-	if item == null:
-		return null
-	var next_state: PlayerState = null
-	match item.action:
-		ItemData.Action.SCAN:
-			next_state = scan_state
-		ItemData.Action.DIG:
-			next_state = dig_state
-	if next_state:
-		InventoryManager.apply_item_use(item)
-	return next_state

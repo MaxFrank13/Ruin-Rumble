@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bjav36ecq5344"]
+
+[ext_resource type="Texture2D" uid="uid://dwmnk4ed53qvc" path="res://assets/misc/GB-enemies.png" id="1_sheet"]
+
+[sub_resource type="AtlasTexture" id="bat1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(8, 8, 24, 16)
+
+[sub_resource type="AtlasTexture" id="bat2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(36, 8, 24, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("bat1")
+}, {
+"duration": 1.0,
+"texture": SubResource("bat2")
+}],
+"loop": 1,
+"name": &"flap",
+"speed": 10.0
+}]

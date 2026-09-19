@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://enemies/basic_enemy.gd" id="1_enemy"]
+
+[node name="BasicEnemy" type="Node2D"]
+z_index = 9
+script = ExtResource("1_enemy")
+
+[node name="Body" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+color = Color(0.509804, 0.309804, 0.333333, 1)
+
+[node name="EyeLeft" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-2.5, -1.5, -0.5, -1.5, -0.5, 0.5, -2.5, 0.5)
+color = Color(0.976471, 0.847059, 0.654902, 1)
+
+[node name="EyeRight" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0.5, -1.5, 2.5, -1.5, 2.5, 0.5, 0.5, 0.5)
+color = Color(0.976471, 0.847059, 0.654902, 1)

@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_script")
 treasure_name = "Gold"
+value = 100

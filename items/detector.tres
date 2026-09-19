@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://10to6mhtqm3a"]
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://10to6mhtqm3a"]
 
 [ext_resource type="Script" uid="uid://bujbgxyh6fp8r" path="res://items/item_data.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://duw4ss84dj3gb" path="res://assets/items/detector.png" id="2_icon"]
@@ -7,7 +7,4 @@
 script = ExtResource("1_script")
 item_name = "Detector"
 icon = ExtResource("2_icon")
-action = 0
-value = 0
-max_durability = -1
-durability_loss_per_use = 0
+capabilities = null

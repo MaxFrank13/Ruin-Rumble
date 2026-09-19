@@ -1,17 +1,26 @@
 class_name ScanState extends PlayerState
 
 @export var idle_state: PlayerState
-@export var scan_radius: int = 3
-@export var ring_stagger: float = 0.08
-@export var display_duration: float = 0.6
+@export var scan_radius: int = 4
+@export var ring_stagger: float = 0.06
+@export var display_duration: float = 0.55
 
 var _finished: bool = false
 
 func enter() -> void:
 	super()
 	_finished = false
-	var hits : Array[Vector2i] = parent.level_tile_map.find_treasure_in_radius(parent.current_tile, scan_radius)
-	parent.treasure_scanned.emit(_format_hint(hits, parent.current_tile))
+	var hits: Array[Vector2i] = parent.level_tile_map.find_buried_in_radius(parent.current_tile, scan_radius)
+	if hits.is_empty():
+		parent.treasure_scanned.emit("NO SIGNAL")
+		parent.show_detector_reading({"found": false})
+	else:
+		var nearest := hits[0]
+		var reading: Dictionary = parent.level_tile_map.scan_signal_reading(nearest, parent.current_tile)
+		parent.treasure_scanned.emit(parent.level_tile_map.get_signal_analysis(nearest, parent.current_tile))
+		parent.show_detector_reading(reading)
+		if bool(reading.get("here", false)):
+			parent.show_treasure_alert()
 	parent.level_tile_map.scan_overlay_finished.connect(_on_overlay_finished, CONNECT_ONE_SHOT)
 	parent.level_tile_map.play_scan_overlay(parent.current_tile, scan_radius, ring_stagger, display_duration)
 
@@ -24,26 +33,4 @@ func process_frame(_delta: float) -> PlayerState:
 
 func _on_overlay_finished() -> void:
 	_finished = true
-
-func _format_hint(hits: Array[Vector2i], from: Vector2i) -> String:
-	if hits.is_empty():
-		return "No treasure detected nearby."
-	var nearest: Vector2i = hits[0]
-	if nearest == from:
-		return "Treasure detected right here."
-	var dist := absi(nearest.x - from.x) + absi(nearest.y - from.y)
-	return "Treasure detected %d tile(s) away, to the %s." % [dist, _direction_hint(nearest - from)]
-
-## TODO: janky bit of code that formats the cardinal direction. just being used for print now
-## can remove later or refine for UI
-func _direction_hint(delta: Vector2i) -> String:
-	var parts: PackedStringArray = []
-	if delta.y < 0:
-		parts.append("north")
-	elif delta.y > 0:
-		parts.append("south")
-	if delta.x > 0:
-		parts.append("east")
-	elif delta.x < 0:
-		parts.append("west")
-	return "".join(parts)
+	parent.complete_action()

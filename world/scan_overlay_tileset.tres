@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dfn7kp46vrtb5"]
+[gd_resource type="TileSet" format=3 uid="uid://dfn7kp46vrtb5"]
 
 [ext_resource type="Texture2D" uid="uid://bgearekst5c7c" path="res://assets/8x8/tilesets/scan_noise_8x8.png" id="1_scan"]
 

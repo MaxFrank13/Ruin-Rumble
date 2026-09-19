@@ -1,14 +1,21 @@
-[gd_scene load_steps=4 format=4 uid="uid://c3frko43r87ek"]
+[gd_scene load_steps=9 format=4 uid="uid://c3frko43r87ek"]
 
-[ext_resource type="PackedScene" uid="uid://bamtvr7akr06q" path="res://ui/hud.tscn" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://dnybvndxx0b6s" path="res://world/ground_tile_map.tscn" id="1_tilemap"]
-[ext_resource type="PackedScene" uid="uid://cp25syl5r682i" path="res://player/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://ui/hud.tscn" id="1_hud"]
+[ext_resource type="PackedScene" path="res://world/ground_tile_map.tscn" id="2_tilemap"]
+[ext_resource type="PackedScene" path="res://player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://enemies/bat_enemy.tscn" id="4_enemy"]
+[ext_resource type="PackedScene" path="res://interactables/room_exit.tscn" id="5_exit"]
+[ext_resource type="PackedScene" path="res://interactables/capability_gate.tscn" id="6_gate"]
+[ext_resource type="Script" path="res://rooms/room_setup.gd" id="7_setup"]
+[ext_resource type="Resource" path="res://items/loot/iron_ball.tres" id="8_fallback"]
 
 [node name="Main" type="Node"]
 
-[node name="HUD" parent="." instance=ExtResource("1_h2yge")]
+[node name="HUD" parent="." instance=ExtResource("1_hud")]
 
-[node name="GroundTileMap" parent="." instance=ExtResource("1_tilemap")]
+[node name="GroundTileMap" parent="." instance=ExtResource("2_tilemap")]
+treasure_chance = 0.0
+item_chance = 0.0
 
 [node name="BlockLayer" parent="GroundTileMap" index="1"]
 tile_map_data = PackedByteArray("AAAEAAIAAQAAAAAAAAAFAAMAAQACAAIAAAAFAAIAAQACAAAAAAAEAAMAAQAAAAIAAAACAAgAAQAEAAIAAAACAAcAAQAEAAAAAAAKAAkAAQAEAAIAAAAKAAgAAQAEAAEAAAAKAAcAAQAEAAAAAAAOAAMAAQACAAIAAAAOAAIAAQACAAAAAAANAAMAAQAAAAIAAAANAAIAAQAAAAAAAAAOAAcAAQAEAAQAAAA=")
@@ -16,10 +23,29 @@ tile_map_data = PackedByteArray("AAAEAAIAAQAAAAAAAAAFAAMAAQACAAIAAAAFAAIAAQACAAA
 [node name="ScanOverlayLayer" parent="GroundTileMap" index="2"]
 z_index = 11
 
-[node name="Player" parent="." node_paths=PackedStringArray("level_tile_map") instance=ExtResource("2_player")]
+[node name="RoomSetup" type="Node2D" parent="."]
+script = ExtResource("7_setup")
+room_id = 1
+
+[node name="Player" parent="." node_paths=PackedStringArray("level_tile_map") instance=ExtResource("3_player")]
 level_tile_map = NodePath("../GroundTileMap")
+starting_tile = Vector2i(1, 6)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_smoothed = true
 
-[editable path="GroundTileMap"]
+[node name="BatEnemy" parent="." instance=ExtResource("4_enemy")]
+starting_tile = Vector2i(9, 9)
+chase_range = 8
+
+[node name="HeavyGate" parent="." instance=ExtResource("6_gate")]
+tile_position = Vector2i(15, 6)
+required_capabilities = PackedStringArray("heavy", "breaker")
+gate_name = "Collapsed Stone Gate"
+emergency_fallback_item = ExtResource("8_fallback")
+emergency_fallback_tile = Vector2i(4, 10)
+
+[node name="DeeperExit" parent="." instance=ExtResource("5_exit")]
+tile_position = Vector2i(16, 6)
+target_scene = "res://rooms/room_02.tscn"
+

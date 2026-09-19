@@ -1,0 +1,92 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://byvlapo3csvpr"]
+
+[ext_resource type="Texture2D" uid="uid://dwmnk4ed53qvc" path="res://assets/misc/GB-enemies.png" id="1_sheet"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivwqb"]
+atlas = ExtResource("1_sheet")
+region = Rect2(17, 96, 22, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4e8d"]
+atlas = ExtResource("1_sheet")
+region = Rect2(85, 96, 21, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmacd"]
+atlas = ExtResource("1_sheet")
+region = Rect2(195, 51, 21, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwv75"]
+atlas = ExtResource("1_sheet")
+region = Rect2(45, 96, 28, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01nop"]
+atlas = ExtResource("1_sheet")
+region = Rect2(146, 97, 35, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6djl8"]
+atlas = ExtResource("1_sheet")
+region = Rect2(111, 97, 35, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2477"]
+atlas = ExtResource("1_sheet")
+region = Rect2(47, 55, 35, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkhyl"]
+atlas = ExtResource("1_sheet")
+region = Rect2(82, 55, 35, 33)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivwqb")
+}],
+"loop": 1,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4e8d")
+}],
+"loop": 1,
+"name": &"idle_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmacd")
+}],
+"loop": 1,
+"name": &"idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwv75")
+}],
+"loop": 1,
+"name": &"idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01nop")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6djl8")
+}],
+"loop": 0,
+"name": &"pound_slam_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2477")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkhyl")
+}],
+"loop": 0,
+"name": &"pound_slam_right",
+"speed": 5.0
+}]

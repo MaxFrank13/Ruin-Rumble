@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://interactables/room_exit.gd" id="1_exit"]
+
+[node name="RoomExit" type="Node2D"]
+z_index = 5
+script = ExtResource("1_exit")
+
+[node name="Door" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+color = Color(0.756863, 0.513726, 0.352941, 1)
+
+[node name="Opening" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-2, -2, 2, -2, 2, 4, -2, 4)
+color = Color(0.258824, 0.160784, 0.211765, 1)
+
+[node name="Prompt" type="Label" parent="."]
+offset_left = -28.0
+offset_top = 6.0
+offset_right = 28.0
+offset_bottom = 16.0
+theme_override_font_sizes/font_size = 8
+text = "A: ENTER"
+horizontal_alignment = 1

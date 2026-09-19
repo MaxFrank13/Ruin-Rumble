@@ -44,5 +44,6 @@ func _do_move(direction: Vector2i) -> bool:
 	tween.tween_property(parent, "global_position", parent.level_tile_map.tile_to_world(parent.current_tile), parent.move_duration)
 	tween.tween_callback(func():
 		_is_moving = false
+		parent.complete_action()
 	)
 	return true

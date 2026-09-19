@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=4]
+
+[ext_resource type="PackedScene" path="res://ui/hud.tscn" id="1_hud"]
+[ext_resource type="PackedScene" path="res://world/ground_tile_map.tscn" id="2_tilemap"]
+[ext_resource type="PackedScene" path="res://player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://enemies/bat_enemy.tscn" id="4_enemy"]
+[ext_resource type="PackedScene" path="res://enemies/moai_enemy.tscn" id="9_moai"]
+[ext_resource type="PackedScene" path="res://interactables/room_exit.tscn" id="5_exit"]
+[ext_resource type="PackedScene" path="res://interactables/capability_gate.tscn" id="6_gate"]
+[ext_resource type="Script" path="res://rooms/room_setup.gd" id="7_setup"]
+[ext_resource type="Resource" path="res://items/loot/rusted_spear.tres" id="8_fallback"]
+
+[node name="Room03" type="Node"]
+
+[node name="HUD" parent="." instance=ExtResource("1_hud")]
+
+[node name="GroundTileMap" parent="." instance=ExtResource("2_tilemap")]
+treasure_chance = 0.0
+item_chance = 0.0
+
+[node name="RoomSetup" type="Node2D" parent="."]
+script = ExtResource("7_setup")
+room_id = 3
+
+[node name="Player" parent="." node_paths=PackedStringArray("level_tile_map") instance=ExtResource("3_player")]
+level_tile_map = NodePath("../GroundTileMap")
+starting_tile = Vector2i(1, 11)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_smoothed = true
+
+[node name="BatEnemy" parent="." instance=ExtResource("4_enemy")]
+starting_tile = Vector2i(7, 6)
+chase_range = 8
+
+[node name="MoaiEnemy" parent="." instance=ExtResource("9_moai")]
+starting_tile = Vector2i(12, 6)
+chase_range = 7
+player_actions_per_move = 3
+
+[node name="FinalSeal" parent="." instance=ExtResource("6_gate")]
+tile_position = Vector2i(14, 1)
+required_capabilities = PackedStringArray("sharp", "breaker")
+gate_name = "Ancient Seal"
+emergency_fallback_item = ExtResource("8_fallback")
+emergency_fallback_tile = Vector2i(12, 11)
+
+[node name="RoomExit" parent="." instance=ExtResource("5_exit")]
+tile_position = Vector2i(15, 1)
+target_scene = "res://rooms/run_complete.tscn"
