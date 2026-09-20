@@ -10,10 +10,6 @@ region = Rect2(0, 72, 48, 48)
 atlas = ExtResource("1_sheet")
 region = Rect2(80, 80, 48, 40)
 
-[sub_resource type="AtlasTexture" id="attack_right"]
-atlas = ExtResource("1_sheet")
-region = Rect2(120, 80, 56, 40)
-
 [sub_resource type="AtlasTexture" id="attack_up"]
 atlas = ExtResource("1_sheet")
 region = Rect2(40, 72, 48, 48)
@@ -34,14 +30,6 @@ animations = [{
 }],
 "loop": 0,
 "name": &"sword_left",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("attack_right")
-}],
-"loop": 0,
-"name": &"sword_right",
 "speed": 8.0
 }, {
 "frames": [{

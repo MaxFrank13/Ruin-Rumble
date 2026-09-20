@@ -197,9 +197,14 @@ func _play_thrown_item_visual(item: ItemData, target_tile: Vector2i) -> void:
 func _play_sword_attack_visual() -> void:
 	if action_sprite == null:
 		return
+
 	_attack_visual_token += 1
 	var token := _attack_visual_token
 	var suffix := "down"
+
+	# Horizontal sword attacks use the artist's LEFT attack for both sides.
+	# RIGHT is the same sprite mirrored with flip_h.
+	action_sprite.flip_h = false
 	match facing_direction:
 		Vector2i(0, -1):
 			suffix = "up"
@@ -208,18 +213,23 @@ func _play_sword_attack_visual() -> void:
 			suffix = "left"
 			action_sprite.offset = Vector2(-12, -7)
 		Vector2i(1, 0):
-			suffix = "right"
-			action_sprite.offset = Vector2(10, -7)
+			suffix = "left"
+			action_sprite.flip_h = true
+			# Mirror the left-side placement as well as the sprite.
+			action_sprite.offset = Vector2(12, -7)
 		_:
 			action_sprite.offset = Vector2(-8, -12)
+
 	action_sprite.animation = "sword_" + suffix
 	action_sprite.frame = 0
 	action_sprite.visible = true
 	animations.visible = false
+
 	get_tree().create_timer(0.16).timeout.connect(func() -> void:
 		if token != _attack_visual_token:
 			return
 		action_sprite.visible = false
+		action_sprite.flip_h = false
 		animations.visible = true
 		_play_current_idle_animation()
 	)
@@ -227,12 +237,16 @@ func _play_sword_attack_visual() -> void:
 func _play_current_idle_animation() -> void:
 	if animations == null or animations.sprite_frames == null:
 		return
+
 	var base := "shield_idle" if shield_charges > 0 else "idle"
 	var suffix := "down"
+
+	# As with movement, RIGHT reuses LEFT and is mirrored.
+	animations.flip_h = facing_direction == Vector2i(1, 0)
 	match facing_direction:
 		Vector2i(0, -1): suffix = "up"
-		Vector2i(-1, 0): suffix = "left"
-		Vector2i(1, 0): suffix = "right"
+		Vector2i(-1, 0), Vector2i(1, 0): suffix = "left"
+
 	var animation_name := "%s_%s" % [base, suffix]
 	if animations.sprite_frames.has_animation(animation_name):
 		animations.play(animation_name)

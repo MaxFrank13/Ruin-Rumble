@@ -1,51 +1,47 @@
-[gd_scene load_steps=9 format=4 uid="uid://c3frko43r87ek"]
+[gd_scene format=3 uid="uid://c3frko43r87ek"]
 
-[ext_resource type="PackedScene" path="res://ui/hud.tscn" id="1_hud"]
-[ext_resource type="PackedScene" path="res://world/ground_tile_map.tscn" id="2_tilemap"]
-[ext_resource type="PackedScene" path="res://player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" uid="uid://bamtvr7akr06q" path="res://ui/hud.tscn" id="1_hud"]
+[ext_resource type="PackedScene" uid="uid://dnybvndxx0b6s" path="res://world/ground_tile_map.tscn" id="2_tilemap"]
+[ext_resource type="PackedScene" uid="uid://cp25syl5r682i" path="res://player/player.tscn" id="3_player"]
 [ext_resource type="PackedScene" path="res://enemies/bat_enemy.tscn" id="4_enemy"]
-[ext_resource type="PackedScene" path="res://interactables/room_exit.tscn" id="5_exit"]
+[ext_resource type="PackedScene" uid="uid://b3yegdvti3vtx" path="res://interactables/room_exit.tscn" id="5_exit"]
 [ext_resource type="PackedScene" path="res://interactables/capability_gate.tscn" id="6_gate"]
-[ext_resource type="Script" path="res://rooms/room_setup.gd" id="7_setup"]
-[ext_resource type="Resource" path="res://items/loot/iron_ball.tres" id="8_fallback"]
+[ext_resource type="Script" uid="uid://dy76lrumosf64" path="res://rooms/room_setup.gd" id="7_setup"]
+[ext_resource type="Resource" uid="uid://ci52e54dmkfws" path="res://items/loot/iron_ball.tres" id="8_fallback"]
+[ext_resource type="AudioStream" uid="uid://drdamwvco77sw" path="res://assets/music/Darcy_ost_0.1.mp3" id="9_kek77"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=568621533]
 
-[node name="HUD" parent="." instance=ExtResource("1_hud")]
+[node name="HUD" parent="." unique_id=35749908 instance=ExtResource("1_hud")]
 
-[node name="GroundTileMap" parent="." instance=ExtResource("2_tilemap")]
+[node name="GroundTileMap" parent="." unique_id=192902518 instance=ExtResource("2_tilemap")]
 treasure_chance = 0.0
 item_chance = 0.0
 
-[node name="BlockLayer" parent="GroundTileMap" index="1"]
-tile_map_data = PackedByteArray("AAAEAAIAAQAAAAAAAAAFAAMAAQACAAIAAAAFAAIAAQACAAAAAAAEAAMAAQAAAAIAAAACAAgAAQAEAAIAAAACAAcAAQAEAAAAAAAKAAkAAQAEAAIAAAAKAAgAAQAEAAEAAAAKAAcAAQAEAAAAAAAOAAMAAQACAAIAAAAOAAIAAQACAAAAAAANAAMAAQAAAAIAAAANAAIAAQAAAAAAAAAOAAcAAQAEAAQAAAA=")
-
-[node name="ScanOverlayLayer" parent="GroundTileMap" index="2"]
-z_index = 11
-
-[node name="RoomSetup" type="Node2D" parent="."]
+[node name="RoomSetup" type="Node2D" parent="." unique_id=87214111]
 script = ExtResource("7_setup")
-room_id = 1
 
-[node name="Player" parent="." node_paths=PackedStringArray("level_tile_map") instance=ExtResource("3_player")]
+[node name="Player" parent="." unique_id=5272281 node_paths=PackedStringArray("level_tile_map") instance=ExtResource("3_player")]
 level_tile_map = NodePath("../GroundTileMap")
 starting_tile = Vector2i(1, 6)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=418836603]
 limit_smoothed = true
 
-[node name="BatEnemy" parent="." instance=ExtResource("4_enemy")]
-starting_tile = Vector2i(9, 9)
+[node name="BatEnemy" parent="." unique_id=1382535526 instance=ExtResource("4_enemy")]
 chase_range = 8
 
-[node name="HeavyGate" parent="." instance=ExtResource("6_gate")]
+[node name="HeavyGate" parent="." unique_id=2116952336 instance=ExtResource("6_gate")]
 tile_position = Vector2i(15, 6)
 required_capabilities = PackedStringArray("heavy", "breaker")
 gate_name = "Collapsed Stone Gate"
 emergency_fallback_item = ExtResource("8_fallback")
 emergency_fallback_tile = Vector2i(4, 10)
 
-[node name="DeeperExit" parent="." instance=ExtResource("5_exit")]
+[node name="DeeperExit" parent="." unique_id=1015348919 instance=ExtResource("5_exit")]
 tile_position = Vector2i(16, 6)
 target_scene = "res://rooms/room_02.tscn"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1224053425]
+stream = ExtResource("9_kek77")
+autoplay = true
